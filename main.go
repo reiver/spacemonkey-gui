@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
@@ -10,7 +11,7 @@ import (
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Container")
+	myWindow := myApp.NewWindow("Spacemonkey")
 
 	message1, _ := message.DefaultMessage.CreateURLImageTextStyle("Image from the web", "This image is loaded from the web", "Google Search", "https://cdn.shopify.com/s/files/1/0507/4354/1965/products/loch-fyne-sunset-or-paintings-and-art-prints-of-scotland-or-by-scottish-artist-kevin-hunter-or-framed-canvas-1.jpg?v=1655920015")
 	card1 := message1.GenerateCard()
@@ -19,7 +20,9 @@ func main() {
 	card2 := message2.GenerateCard()
 
 	content := container.New(layout.NewGridLayout(1), card1, card2)
+	scroll := container.NewVScroll(content)
 
-	myWindow.SetContent(content)
+	myWindow.SetContent(scroll)
+	myWindow.Resize(fyne.NewSize(100, 600))
 	myWindow.ShowAndRun()
 }
